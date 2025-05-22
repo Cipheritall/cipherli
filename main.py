@@ -1,17 +1,13 @@
 import argparse
 import os
+import sys
 from symmetric import SymmetricCrypto
 from config import CipherLiConfig
 from updater import UpdateChecker
 
 def check_updates():
     checker = UpdateChecker()
-    update_available, latest_version, latest_release_html_url = checker.check_for_updates()
-    if update_available:
-        print(f"\nNew version available: v{latest_version}")
-        print("Release notes:")
-        print(latest_release_html_url)
-        print("\nRun 'git pull' to update.\n")
+    checker.prompt_and_update()
 
 def main():
     if CipherLiConfig.CHECK_UPDATES:

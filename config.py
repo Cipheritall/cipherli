@@ -14,4 +14,5 @@ class CipherLiConfig:
 
     # GitHub repository API URL for version checking
     GITHUB_API_URL = "https://api.github.com/repos/cipheritall/cipherli/releases"
+    GET_SCRIPT_URL = "https://raw.githubusercontent.com/cipheritall/cipherli/main/get.sh"
     CHECK_UPDATES = True
