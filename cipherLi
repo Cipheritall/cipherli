@@ -1,0 +1,9 @@
+#!/bin/bash
+# Wrapper pour lancer main.py de cipherLi
+
+# Chemin absolu vers le script
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# Activer le venv
+source "$SCRIPT_DIR/venv/bin/activate"
+# Exécuter main.py avec tous les arguments
+python "$SCRIPT_DIR/main.py" -h "$@"

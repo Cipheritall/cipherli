@@ -43,10 +43,11 @@ SCRIPT_DIR="\$(cd "\$(dirname "\$0")" && pwd)"
 # Activer le venv
 source "\$SCRIPT_DIR/venv/bin/activate"
 # Exécuter main.py avec tous les arguments
-"\$PYTHON_EXEC" "\$SCRIPT_DIR/main.py" "\$@"
+python "\$SCRIPT_DIR/main.py" -h "\$@"
 EOF
 
 # Rendre le wrapper exécutable
-sudo chmod +x "$WRAPPER_PATH"
-ln -s "$WRAPPER_PATH" /usr/bin/cipherLi
+#sudo chmod +x "$WRAPPER_PATH"
+sudo chmod 755 "$WRAPPER_PATH" 
+sudo ln -s "$WRAPPER_PATH" /bin/cipherLi
 echo "Installation terminée. Utilisez 'cipherLi' dans le terminal."
