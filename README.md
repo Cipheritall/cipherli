@@ -2,8 +2,12 @@
 
 CipherLi is a command-line tool for file encryption and decryption using symmetric encryption.
 
-## Installation
-
+## One shot Installation
+   ```bash
+   curl https://raw.githubusercontent.com/Cipheritall/cipherli/refs/heads/main/get.sh | sh
+   ```
+   
+## Cloned Installation
 1. Clone this repository or download the source code
 2. Run the installation script:
 
