@@ -1,4 +1,4 @@
-name: Test cipherLi
+name: Test cipherLi with multiple files
 
 on:
   push:
@@ -30,18 +30,23 @@ jobs:
           pip install --upgrade pip
           pip install cryptography
 
-      - name: Run tests
+      - name: Run encryption/decryption loop
         run: |
           source venv/bin/activate
-          # Crée un fichier de test
-          echo "Ceci est un test" > test_input.txt
-          # Test encryption
-          python main.py encrypt test_input.txt encrypted.bin
-          # Vérifie que le fichier chiffré existe
-          ls encrypted.bin
-          # Test déchiffrement
-          python main.py decrypt encrypted.bin decrypted.txt
-          # Vérifie le contenu déchiffré
-          cat decrypted.txt
-          # Vérification du contenu
-          grep "Ceci est un test" decrypted.txt
+          
+          # Créer plusieurs fichiers de test
+          for i in {1..3}; do
+            echo "Contenu du fichier $i" > test_input_$i.txt
+          done
+          
+          # Chiffrer tous les fichiers
+          for i in {1..3}; do
+            python main.py encrypt -- "$i" "test_input_$i.txt" "encrypted_$i.bin"
+          done
+          
+          # Déchiffrer tous les fichiers et vérifier le contenu
+          for i in {1..3}; do
+            python main.py decrypt -- "encrypted_$i.bin" "decrypted_$i.txt"
+            # Vérifier que le contenu déchiffré correspond
+            grep "Contenu du fichier $i" "decrypted_$i.txt"
+          done
