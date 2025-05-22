@@ -1,0 +1,47 @@
+name: Test cipherLi
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Create venv
+        run: python -m venv venv
+
+      - name: Install dependencies
+        run: |
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install cryptography
+
+      - name: Run tests
+        run: |
+          source venv/bin/activate
+          # Crée un fichier de test
+          echo "Ceci est un test" > test_input.txt
+          # Test encryption
+          python main.py encrypt test_input.txt encrypted.bin
+          # Vérifie que le fichier chiffré existe
+          ls encrypted.bin
+          # Test déchiffrement
+          python main.py decrypt encrypted.bin decrypted.txt
+          # Vérifie le contenu déchiffré
+          cat decrypted.txt
+          # Vérification du contenu
+          grep "Ceci est un test" decrypted.txt
