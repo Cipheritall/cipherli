@@ -45,9 +45,11 @@ source "\$SCRIPT_DIR/venv/bin/activate"
 # Exécuter main.py avec tous les arguments
 python "\$SCRIPT_DIR/main.py" -h "\$@"
 EOF
-
 # Rendre le wrapper exécutable
-#sudo chmod +x "$WRAPPER_PATH"
 sudo chmod 755 "$WRAPPER_PATH" 
-sudo ln -s "$WRAPPER_PATH" /bin/cipherLi
+# Copier le code dans /opt/cipherLi/
+sudo cp -r $(pwd) /opt/cipherLi/
+# Créer un lien symbolique vers le wrapper dans /usr/local/bin
+sudo ln -s /opt/cipherLi/cipherLi /bin/cipherLi
+
 echo "Installation terminée. Utilisez 'cipherLi' dans le terminal."
