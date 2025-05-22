@@ -28,7 +28,7 @@ jobs:
         run: |
           source venv/bin/activate
           pip install --upgrade pip
-          pip install cryptography
+          pip install -r requirements.txt
 
       - name: Run encryption/decryption test
         run: |
