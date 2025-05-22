@@ -13,6 +13,9 @@ CipherLi v1.4.0 - Installation System Enhancement
 - Improved support for environments without sudo
 - Enhanced package management compatibility
 - Added fallback mechanisms for different system configurations
+- Fixed python3-venv dependency installation issues
+- Improved virtual environment creation reliability
+- Added better error handling during installation
 
 ## v1.3.1
 

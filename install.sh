@@ -14,16 +14,38 @@ try_sudo() {
     fi
 }
 
-# Check if Python 3 is installed
+# Function to install package
+install_package() {
+    if command_exists apt-get; then
+        try_sudo apt-get update && try_sudo apt-get install -y "$1"
+    elif command_exists yum; then
+        try_sudo yum install -y "$1"
+    else
+        echo "Error: Package manager not found. Please install $1 manually."
+        exit 1
+    fi
+}
+
+# Check Python3 and venv
 if ! command_exists python3; then
-    echo "Python3 is not installed. Please install it before continuing."
-    exit 1
+    echo "Installing Python3..."
+    install_package python3
 fi
 
-# Check if venv is available
+# Check and install python3-venv
 if ! python3 -m venv --help &> /dev/null; then
-    echo "The venv module is not available. Please install Python 3 with venv support."
-    echo "On Debian/Ubuntu: sudo apt-get install python3-venv"
+    echo "Installing python3-venv..."
+    if command_exists apt-get; then
+        install_package python3-venv
+    elif command_exists yum; then
+        install_package python3-pip
+        try_sudo python3 -m pip install virtualenv
+    fi
+fi
+
+# Verify venv is now available
+if ! python3 -m venv --help &> /dev/null; then
+    echo "Failed to install python3-venv. Please install it manually."
     exit 1
 fi
 
@@ -39,16 +61,33 @@ fi
 try_sudo mkdir -p /opt/cipherli
 try_sudo cp -r $(pwd)/* /opt/cipherli/
 
-# Create virtual environment
+# Create virtual environment with error handling
 cd /opt/cipherli
 if [ ! -d "venv" ]; then
-    python3 -m venv venv
+    echo "Creating virtual environment..."
+    if ! python3 -m venv venv; then
+        echo "Failed to create virtual environment. Please check your Python installation."
+        exit 1
+    fi
     echo "Virtual environment created in /opt/cipherli/venv"
 fi
 
-# Activate venv and install requirements
-source /opt/cipherli/venv/bin/activate
-pip install -r requirements.txt
+# Activate venv and install requirements with error handling
+if [ ! -f "venv/bin/activate" ]; then
+    echo "Virtual environment activation script not found."
+    exit 1
+fi
+
+source venv/bin/activate
+if ! command_exists pip; then
+    echo "pip not found in virtual environment. Installing..."
+    try_sudo python3 -m ensurepip
+fi
+
+if ! pip install -r requirements.txt; then
+    echo "Failed to install requirements. Please check your internet connection."
+    exit 1
+fi
 
 # Create the wrapper script
 cat << EOF | try_sudo tee "/opt/cipherli/cipherLi" > /dev/null
