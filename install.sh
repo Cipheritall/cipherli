@@ -48,14 +48,13 @@ EOF
 # Rendre le wrapper exécutable
 sudo chmod 755 "$WRAPPER_PATH" 
 # Copier le code dans /opt/cipherLi/
-sudo mkdir -p /opt/cipherLi/
 # Vérifier si le répertoire existe déjà
 if [ -d "/opt/cipherLi/" ]; then
     echo "Le répertoire /opt/cipherLi/ existe déjà. Il sera écrasé."
     sudo rm -rf /opt/cipherLi/*
 fi
 
-sudo cp -r $(pwd) /opt/cipherLi/
+sudo cp -r $(pwd) /opt/
 # Créer un lien symbolique vers le wrapper dans /usr/local/bin
 sudo ln -s /opt/cipherLi/cipherLi /bin/cipherLi
 
