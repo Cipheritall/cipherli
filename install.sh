@@ -44,7 +44,7 @@ cat << EOF | sudo tee "/opt/cipherLi/cipherLi" > /dev/null
 # Wrapper pour lancer main.py de cipherLi
 
 # Chemin absolu vers le script
-SCRIPT_DIR="\$(cd "\$(dirname "\$0")" && pwd)"
+SCRIPT_DIR=/opt/cipherLi
 # Activer le venv
 source "\$SCRIPT_DIR/venv/bin/activate"
 # Exécuter main.py avec tous les arguments
