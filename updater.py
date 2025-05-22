@@ -1,3 +1,4 @@
+from typing import Tuple
 import requests
 from config import CipherLiConfig
 from packaging import version
@@ -7,7 +8,7 @@ class UpdateChecker:
         self.current_version = CipherLiConfig.VERSION
         self.repo_url = CipherLiConfig.GITHUB_API_URL
 
-    def check_for_updates(self) -> tuple[bool, str, str]:
+    def check_for_updates(self) -> Tuple[bool, str, str]:
         """
         Checks if a new version is available
         Returns: (update_available, latest_version, changelog)

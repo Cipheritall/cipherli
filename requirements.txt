@@ -1,3 +1,3 @@
-cryptography
-requests 
-packaging
+cryptography>=41.0.0
+requests>=2.31.0
+packaging>=23.0
