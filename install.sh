@@ -13,15 +13,23 @@ if ! python3 -m venv --help &> /dev/null; then
     exit 1
 fi
 
+# Copier le code dans /opt/cipherLi/
+if [ -d "/opt/cipherLi/" ]; then
+    echo "Le répertoire /opt/cipherLi/ existe déjà. Il sera écrasé."
+    sudo rm -rf /opt/cipherLi/*
+fi
+
+sudo cp -r $(pwd) /opt/
+
 # Créer un environnement virtuel dans le répertoire 'venv'
+cd /opt/cipherLi
 if [ ! -d "venv" ]; then
     python3 -m venv venv
-    echo "Environnement virtuel créé dans ./venv"
+    echo "Environnement virtuel créé dans /opt/cipherLi/venv"
 fi
 
 # Activer le venv
-pwd
-source $(pwd)/venv/bin/activate
+source /opt/cipherLi/venv/bin/activate
 
 # Vérifier si cryptography est installé dans le venv
 pip show cryptography &> /dev/null
@@ -30,11 +38,8 @@ if [ $? -ne 0 ]; then
     pip install cryptography
 fi
 
-# Définir le chemin du script wrapper
-WRAPPER_PATH=$(pwd)"/cipherLi"
-
 # Créer le script wrapper
-cat << EOF | sudo tee "$WRAPPER_PATH" > /dev/null
+cat << EOF | sudo tee "/opt/cipherLi/cipherLi" > /dev/null
 #!/bin/bash
 # Wrapper pour lancer main.py de cipherLi
 
@@ -43,19 +48,13 @@ SCRIPT_DIR="\$(cd "\$(dirname "\$0")" && pwd)"
 # Activer le venv
 source "\$SCRIPT_DIR/venv/bin/activate"
 # Exécuter main.py avec tous les arguments
-python "\$SCRIPT_DIR/main.py" -h "\$@"
+python "\$SCRIPT_DIR/main.py" "\$@"
 EOF
-# Rendre le wrapper exécutable
-sudo chmod 755 "$WRAPPER_PATH" 
-# Copier le code dans /opt/cipherLi/
-# Vérifier si le répertoire existe déjà
-if [ -d "/opt/cipherLi/" ]; then
-    echo "Le répertoire /opt/cipherLi/ existe déjà. Il sera écrasé."
-    sudo rm -rf /opt/cipherLi/*
-fi
 
-sudo cp -r $(pwd) /opt/
-# Créer un lien symbolique vers le wrapper dans /usr/local/bin
-sudo ln -s /opt/cipherLi/cipherLi /bin/cipherLi
+# Rendre le wrapper exécutable
+sudo chmod 755 "/opt/cipherLi/cipherLi"
+
+# Créer un lien symbolique vers le wrapper dans /bin
+sudo ln -sf /opt/cipherLi/cipherLi /bin/cipherLi
 
 echo "Installation terminée. Utilisez 'cipherLi' dans le terminal."
