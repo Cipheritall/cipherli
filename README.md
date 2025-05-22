@@ -1,6 +1,15 @@
-# CipherLi
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Cipheritall/cipherli/test.yml)
+<p align="center">
+    <img src= "https://github.com/Cipheritall/cipherli/blob/main/cipherli.png?raw=true"
+        height="300">
+</p>
+<p align="center">
+   <img src="https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black" />
+   <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/Cipheritall/cipherli/test.yml">
+</p>
 
+------
+
+# CipherLi
 CipherLi is a command-line tool for file encryption and decryption using symmetric encryption.
 
 ## One shot Installation
