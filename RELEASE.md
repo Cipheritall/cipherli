@@ -1,6 +1,20 @@
 # CipherLi Release History
 
-## v1.2.0 (Latest)
+## v1.3.0 (Latest)
+
+### Release Title
+CipherLi v1.3.0 - Improved Update System
+
+### Release Date
+2024-02-15
+
+### Changes
+- Improved update system with user confirmation
+- Added get.sh script for easier installation
+- Better error handling in update process
+- Enhanced version checking functionality
+
+## v1.2.0
 
 ### Release Title
 CipherLi v1.2.0 - Enhanced Encryption Features
