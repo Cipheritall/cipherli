@@ -5,11 +5,11 @@ from updater import UpdateChecker
 
 def check_updates():
     checker = UpdateChecker()
-    update_available, latest_version, changelog = checker.check_for_updates()
+    update_available, latest_version, latest_release_html_url = checker.check_for_updates()
     if update_available:
         print(f"\nNew version available: v{latest_version}")
-        print("Changelog:")
-        print(changelog)
+        print("Release notes:")
+        print(latest_release_html_url)
         print("\nRun 'git pull' to update.\n")
 
 def main():
@@ -30,7 +30,7 @@ def main():
     if args.mode == "encrypt":
         crypto.encrypt_file(args.input_file, args.output_file)
         print(f"File encrypted and saved to {args.output_file}")
-    else:
+    elif args.mode == "decrypt":
         crypto.decrypt_file(args.input_file, args.output_file)
         print(f"File decrypted and saved to {args.output_file}")
 

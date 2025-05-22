@@ -11,18 +11,18 @@ class UpdateChecker:
     def check_for_updates(self) -> Tuple[bool, str, str]:
         """
         Checks if a new version is available
-        Returns: (update_available, latest_version, changelog)
+        Returns: (update_available, latest_version, release_notes_url)
         """
         try:
             response = requests.get(self.repo_url, timeout=5)
             if response.status_code == 200:
                 latest_release = response.json()[0]
                 latest_version = latest_release['tag_name'].lstrip('v')
-                changelog = latest_release['body']
-                
+                release_notes_url = latest_release['html_url']
+
                 if version.parse(latest_version) > version.parse(self.current_version):
-                    return True, latest_version, changelog
-            
+                    return True, latest_version, release_notes_url
+
             return False, self.current_version, ""
             
         except Exception:
