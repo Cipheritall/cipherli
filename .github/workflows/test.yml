@@ -30,26 +30,60 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run encryption/decryption test
+      - name: Run file encryption/decryption test
         run: |
           source venv/bin/activate
           
-          # Créer un fichier de test
-          echo "Ceci est un test unique" > test_input.txt
+          # Create test file
+          echo "This is a unique test" > test_input.txt
           
-          # Chiffrer le fichier
-          python main.py encrypt "mon_mot_de_passe" test_input.txt encrypted.bin
+          # Encrypt file
+          python main.py encrypt "test_password" test_input.txt encrypted.bin
           
-          # Vérifier que le fichier chiffré existe
+          # Verify encrypted file exists
           ls encrypted.bin
           
-          # Déchiffrer le fichier
-          python main.py decrypt "mon_mot_de_passe" encrypted.bin decrypted.txt
+          # Decrypt file
+          python main.py decrypt "test_password" encrypted.bin decrypted.txt
           
-          # Vérifier que le contenu déchiffré correspond
-          if grep -q "Ceci est un test unique" decrypted.txt; then
-            echo "Test réussi : contenu correct."
+          # Verify decrypted content
+          if grep -q "This is a unique test" decrypted.txt; then
+            echo "File encryption test passed: content matches"
           else
-            echo "Test échoué : contenu incorrect."
+            echo "File encryption test failed: content mismatch"
+            exit 1
+          fi
+
+      - name: Run folder encryption/decryption test
+        run: |
+          source venv/bin/activate
+          
+          # Create test folder structure
+          mkdir -p test_folder/subfolder
+          echo "Test file 1" > test_folder/file1.txt
+          echo "Test file 2" > test_folder/file2.txt
+          echo "Subfolder file" > test_folder/subfolder/file3.txt
+          
+          # Encrypt folder
+          python main.py encrypt "test_password" test_folder encrypted_folder -r
+          
+          # Verify encrypted folder structure
+          if [ ! -f "encrypted_folder/file1.txt.enc" ] || \
+             [ ! -f "encrypted_folder/file2.txt.enc" ] || \
+             [ ! -f "encrypted_folder/subfolder/file3.txt.enc" ]; then
+            echo "Folder encryption test failed: missing encrypted files"
+            exit 1
+          fi
+          
+          # Decrypt folder
+          python main.py decrypt "test_password" encrypted_folder decrypted_folder -r
+          
+          # Verify decrypted content
+          if grep -q "Test file 1" decrypted_folder/file1.txt && \
+             grep -q "Test file 2" decrypted_folder/file2.txt && \
+             grep -q "Subfolder file" decrypted_folder/subfolder/file3.txt; then
+            echo "Folder encryption test passed: all contents match"
+          else
+            echo "Folder encryption test failed: content mismatch"
             exit 1
           fi

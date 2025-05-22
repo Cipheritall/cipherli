@@ -39,6 +39,20 @@ Decrypt a file:
 cipherLi decrypt "your-password" encrypted-file.enc decrypted-file.txt
 ```
 
+Encrypt a folder:
+
+```bash
+cipherLi encrypt "your-password" input-folder/ encrypted-folder/ -r
+```
+
+Decrypt a folder:
+
+```bash
+cipherLi decrypt "your-password" encrypted-folder/ decrypted-folder/ -r
+```
+
+The `-r` flag enables recursive processing of subfolders.
+
 ### Security Notes
 
 - Always use strong passwords
@@ -53,7 +67,7 @@ cipherLi decrypt "your-password" encrypted-file.enc decrypted-file.txt
 
 ## Version
 
-Current version: 1.0.0
+Current version: 1.1.0
 
 ## License
 
