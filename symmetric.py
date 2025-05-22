@@ -80,8 +80,10 @@ class SymmetricCrypto:
             output_path.mkdir(parents=True)
         
         for item in input_path.iterdir():
-            if item.is_file() and item.name.endswith('.enc'):
-                output_item = output_path / item.name[:-4]  # remove .enc
-                self.decrypt_file(str(item), str(output_item))
+            if item.is_file():
+                if item.name.endswith('.enc'):
+                    output_item = output_path / item.name[:-4]  # remove .enc
+                    self.decrypt_file(str(item), str(output_item))
             elif item.is_dir() and recursive:
+                output_item = output_path / item.name
                 self.decrypt_folder(str(item), str(output_item), recursive)
