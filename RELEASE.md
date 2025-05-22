@@ -1,6 +1,20 @@
 # CipherLi Release History
 
-## v1.1.0 (Latest)
+## v1.2.0 (Latest)
+
+### Release Title
+CipherLi v1.2.0 - Enhanced Encryption Features
+
+### Release Date
+2024-02-10
+
+### Changes
+- Added folder encryption/decryption support
+- Added recursive folder processing with -r flag
+- Added automated testing for folder encryption
+- Improved error handling for file and folder operations
+
+## v1.1.0
 
 ### Release Title
 CipherLi v1.1.0 - Update System Integration
