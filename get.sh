@@ -6,44 +6,39 @@ set -e
 echo "CipherLi Installation Script"
 echo "==========================="
 
-# Check if git is installed
-if ! command -v git &> /dev/null; then
-    echo "Git is not installed. Installing..."
-    if command -v apt-get &> /dev/null; then
-        sudo apt-get update && sudo apt-get install -y git
-    elif command -v yum &> /dev/null; then
-        sudo yum install -y git
-    else
-        echo "Error: Cannot install git. Please install it manually."
-        exit 1
-    fi
-fi
+# Function to check if command exists and is executable
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
 
-# Check if curl is installed
-if ! command -v curl &> /dev/null; then
-    echo "curl is not installed. Installing..."
-    if command -v apt-get &> /dev/null; then
-        sudo apt-get update && sudo apt-get install -y curl
-    elif command -v yum &> /dev/null; then
-        sudo yum install -y curl
+# Function to install package based on available package manager
+install_package() {
+    local package=$1
+    if command_exists apt-get; then
+        if command_exists sudo; then
+            sudo apt-get update && sudo apt-get install -y "$package"
+        else
+            apt-get update && apt-get install -y "$package"
+        fi
+    elif command_exists yum; then
+        if command_exists sudo; then
+            sudo yum install -y "$package"
+        else
+            yum install -y "$package"
+        fi
     else
-        echo "Error: Cannot install curl. Please install it manually."
-        exit 1
+        echo "Warning: Cannot install $package. Please install it manually."
+        return 1
     fi
-fi
+}
 
-# Check Python requirements
-if ! command -v python3 &> /dev/null; then
-    echo "Python3 is not installed. Installing..."
-    if command -v apt-get &> /dev/null; then
-        sudo apt-get update && sudo apt-get install -y python3 python3-venv
-    elif command -v yum &> /dev/null; then
-        sudo yum install -y python3 python3-venv
-    else
-        echo "Error: Cannot install Python3. Please install it manually."
-        exit 1
+# Check dependencies
+for cmd in git curl python3; do
+    if ! command_exists "$cmd"; then
+        echo "$cmd is not installed. Attempting to install..."
+        install_package "$cmd" || exit 1
     fi
-fi
+done
 
 # Create temporary directory
 TMP_DIR=$(mktemp -d)
@@ -58,7 +53,11 @@ cd cipherli
 
 echo "Installing CipherLi..."
 chmod +x install.sh
-sudo ./install.sh
+if command_exists sudo; then
+    sudo ./install.sh
+else
+    ./install.sh
+fi
 
 # Cleanup
 cd /
