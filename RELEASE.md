@@ -1,6 +1,20 @@
 # CipherLi Release History
 
-## v1.3.0 (Latest)
+## v1.3.1 (Latest)
+
+### Release Title
+CipherLi v1.3.1 - Update System Fix
+
+### Release Date
+2024-02-20
+
+### Changes
+- Fixed EOF error in update system when running in non-interactive mode
+- Added graceful fallback for automated environments
+- Improved error handling during update checks
+- Enhanced update process stability
+
+## v1.3.0
 
 ### Release Title
 CipherLi v1.3.0 - Improved Update System

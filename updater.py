@@ -45,8 +45,12 @@ class UpdateChecker:
             print(f"Current version: {self.current_version}")
             print(f"Release notes: {latest_release_html_url}")
             
-            response = input("\nWould you like to update? [y/N]: ").strip().lower()
-            if response in ['y', 'yes']:
-                self.execute_update()
-            else:
-                print("Update skipped. Continuing with current version.\n")
+            try:
+                response = input("\nWould you like to update? [y/N]: ").strip().lower()
+                if response in ['y', 'yes']:
+                    self.execute_update()
+            except EOFError:
+                print("\nSkipping update - non-interactive environment detected")
+            except Exception as e:
+                print(f"\nUpdate check failed: {str(e)}")
+            print("Continuing with current version.\n")
