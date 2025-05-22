@@ -31,12 +31,8 @@ fi
 # Activer le venv
 source /opt/cipherli/venv/bin/activate
 
-# Vérifier si cryptography est installé dans le venv
-pip show cryptography &> /dev/null
-if [ $? -ne 0 ]; then
-    echo "Installation des bibliothèques requises dans le venv..."
-    pip install -r requirements.txt
-fi
+echo "Installation des bibliothèques requises dans le venv..."
+pip install -r requirements.txt
 
 # Créer le script wrapper
 cat << EOF | sudo tee "/opt/cipherli/cipherLi" > /dev/null
