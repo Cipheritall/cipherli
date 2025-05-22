@@ -20,7 +20,8 @@ if [ ! -d "venv" ]; then
 fi
 
 # Activer le venv
-source venv/bin/activate
+pwd
+source $(pwd)/venv/bin/activate
 
 # Vérifier si cryptography est installé dans le venv
 pip show cryptography &> /dev/null
@@ -30,7 +31,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Définir le chemin du script wrapper
-WRAPPER_PATH="/usr/local/bin/cipherLi"
+WRAPPER_PATH=$(pwd)"/cipherLi"
 
 # Créer le script wrapper
 cat << EOF | sudo tee "$WRAPPER_PATH" > /dev/null
@@ -47,5 +48,5 @@ EOF
 
 # Rendre le wrapper exécutable
 sudo chmod +x "$WRAPPER_PATH"
-
+ln -s "$WRAPPER_PATH" /usr/bin/cipherLi
 echo "Installation terminée. Utilisez 'cipherLi' dans le terminal."
