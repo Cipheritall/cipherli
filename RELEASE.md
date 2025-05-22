@@ -1,6 +1,20 @@
 # CipherLi Release History
 
-## v1.3.1 (Latest)
+## v1.4.0 (Latest)
+
+### Release Title
+CipherLi v1.4.0 - Installation System Enhancement
+
+### Release Date
+2024-02-25
+
+### Changes
+- Added backup of previous installations during updates
+- Improved support for environments without sudo
+- Enhanced package management compatibility
+- Added fallback mechanisms for different system configurations
+
+## v1.3.1
 
 ### Release Title
 CipherLi v1.3.1 - Update System Fix

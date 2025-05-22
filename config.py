@@ -1,6 +1,6 @@
 class CipherLiConfig:
     NAME = "CipherLi"
-    VERSION = "1.3.1"
+    VERSION = "1.4.0"
     # Default path to store temporary files and others
     TEMP_DIR = "/tmp/cipherli"
     
