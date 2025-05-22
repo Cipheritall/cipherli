@@ -22,7 +22,7 @@ fi
 sudo cp -r $(pwd) /opt/
 
 # Créer un environnement virtuel dans le répertoire 'venv'
-cd /opt/cipherLi
+cd /opt/cipherli
 if [ ! -d "venv" ]; then
     python3 -m venv venv
     echo "Environnement virtuel créé dans /opt/cipherli/venv"
@@ -44,7 +44,7 @@ cat << EOF | sudo tee "/opt/cipherli/cipherLi" > /dev/null
 # Wrapper pour lancer main.py de cipherLi
 
 # Chemin absolu vers le script
-SCRIPT_DIR=/opt/cipherLi
+SCRIPT_DIR=/opt/cipherli
 # Activer le venv
 source "\$SCRIPT_DIR/venv/bin/activate"
 # Exécuter main.py avec tous les arguments
