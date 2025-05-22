@@ -1,6 +1,20 @@
 # CipherLi Release History
 
-## v1.4.0 (Latest)
+## v1.4.1 (Latest)
+
+### Release Title
+CipherLi v1.4.1 - Installation Reliability Fix
+
+### Release Date
+2024-02-26
+
+### Changes
+- Fixed python3-venv detection and installation
+- Added explicit pip installation in virtual environment
+- Improved package manager detection
+- Enhanced virtual environment creation process
+
+## v1.4.0
 
 ### Release Title
 CipherLi v1.4.0 - Installation System Enhancement

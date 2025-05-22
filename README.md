@@ -67,7 +67,7 @@ The `-r` flag enables recursive processing of subfolders.
 
 ## Version
 
-Current version: 1.4.0
+Current version: 1.4.1
 
 ## License
 
