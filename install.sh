@@ -34,8 +34,8 @@ source /opt/cipherli/venv/bin/activate
 # Vérifier si cryptography est installé dans le venv
 pip show cryptography &> /dev/null
 if [ $? -ne 0 ]; then
-    echo "Installation de la bibliothèque cryptography dans le venv..."
-    pip install cryptography
+    echo "Installation des bibliothèques requises dans le venv..."
+    pip install -r requirements.txt
 fi
 
 # Créer le script wrapper

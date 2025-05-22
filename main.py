@@ -1,8 +1,21 @@
 import argparse
 from symmetric import SymmetricCrypto
 from config import CipherLiConfig
+from updater import UpdateChecker
+
+def check_updates():
+    checker = UpdateChecker()
+    update_available, latest_version, changelog = checker.check_for_updates()
+    if update_available:
+        print(f"\nNew version available: v{latest_version}")
+        print("Changelog:")
+        print(changelog)
+        print("\nRun 'git pull' to update.\n")
 
 def main():
+    if CipherLiConfig.CHECK_UPDATES:
+        check_updates()
+
     parser = argparse.ArgumentParser(description=f"{CipherLiConfig.NAME} {CipherLiConfig.VERSION} - File encryption/decryption tool")
     parser.add_argument("mode", choices=["encrypt", "decrypt"], help="Mode: encrypt or decrypt")
     parser.add_argument("password", help="Password for key derivation")

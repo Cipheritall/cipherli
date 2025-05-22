@@ -1,4 +1,3 @@
-
 class CipherLiConfig:
     NAME = "CipherLi"
     VERSION = "1.0.0"
@@ -12,3 +11,7 @@ class CipherLiConfig:
     DEFAULT_PASSWORD_PROMPT = "Entrez votre mot de passe : "
     LOG_FILE = "cipherli.log"
     # Ajoutez d'autres paramètres selon vos besoins
+
+    # GitHub repository API URL for version checking
+    GITHUB_API_URL = "https://api.github.com/repos/cipheritall/cipherli/releases"
+    CHECK_UPDATES = True
