@@ -1,56 +1,56 @@
 #!/bin/bash
 
-# Vérifier si Python 3 est installé
+# Check if Python 3 is installed
 if ! command -v python3 &> /dev/null; then
-    echo "Python3 n'est pas installé. Veuillez l'installer avant de continuer."
+    echo "Python3 is not installed. Please install it before continuing."
     exit 1
 fi
 
-# Vérifier si venv est disponible
+# Check if venv is available
 if ! python3 -m venv --help &> /dev/null; then
-    echo "Le module venv n'est pas disponible. Veuillez installer Python 3 avec venv support."
-    echo "Sur Debian/Ubuntu : sudo apt-get install python3-venv"
+    echo "The venv module is not available. Please install Python 3 with venv support."
+    echo "On Debian/Ubuntu: sudo apt-get install python3-venv"
     exit 1
 fi
 
-# Copier le code dans /opt/cipherli/
+# Copy code to /opt/cipherli/
 if [ -d "/opt/cipherli/" ]; then
-    echo "Le répertoire /opt/cipherli/ existe déjà. Il sera écrasé."
+    echo "Directory /opt/cipherli/ already exists. It will be overwritten."
     sudo rm -rf /opt/cipherli/*
 fi
 
 sudo cp -r $(pwd) /opt/
 
-# Créer un environnement virtuel dans le répertoire 'venv'
+# Create virtual environment in 'venv' directory
 cd /opt/cipherli
 if [ ! -d "venv" ]; then
     python3 -m venv venv
-    echo "Environnement virtuel créé dans /opt/cipherli/venv"
+    echo "Virtual environment created in /opt/cipherli/venv"
 fi
 
-# Activer le venv
+# Activate venv
 source /opt/cipherli/venv/bin/activate
 
-echo "Installation des bibliothèques requises dans le venv..."
+echo "Installing required libraries in venv..."
 pip install -r requirements.txt
 
-# Créer le script wrapper
+# Create the wrapper script
 cat << EOF | sudo tee "/opt/cipherli/cipherLi" > /dev/null
 #!/bin/bash
-# Wrapper pour lancer main.py de cipherLi
+# Wrapper to launch main.py of cipherLi
 
-# Chemin absolu vers le script
+# Absolute path to the script
 SCRIPT_DIR=/opt/cipherli
-# Activer le venv
+# Activate venv
 source "\$SCRIPT_DIR/venv/bin/activate"
-# Exécuter main.py avec tous les arguments
+# Execute main.py with all arguments
 python "\$SCRIPT_DIR/main.py" "\$@"
 EOF
 
-# Rendre le wrapper exécutable
+# Make the wrapper executable
 sudo chmod 755 "/opt/cipherli/cipherLi"
 
-# Créer un lien symbolique vers le wrapper dans /bin
+# Create a symbolic link to the wrapper in /bin
 sudo ln -sf /opt/cipherli/cipherLi /bin/cipherLi
 
-echo "Installation terminée. Utilisez 'cipherLi' dans le terminal."
+echo "Installation complete. Use 'cipherLi' in the terminal."

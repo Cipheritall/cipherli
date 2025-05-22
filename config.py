@@ -1,16 +1,16 @@
 class CipherLiConfig:
     NAME = "CipherLi"
     VERSION = "1.1.0"
-    # Chemin par défaut pour stocker les fichiers temporaires ou autres
+    # Default path to store temporary files and others
     TEMP_DIR = "/tmp/cipherli"
     
-    # Chemin du script main.py (si besoin)
+    # Main script path (if needed)
     MAIN_SCRIPT_PATH = "main.py"
     
-    # Autres paramètres de configuration
-    DEFAULT_PASSWORD_PROMPT = "Entrez votre mot de passe : "
+    # Other configuration parameters
+    DEFAULT_PASSWORD_PROMPT = "Enter your password: "
     LOG_FILE = "cipherli.log"
-    # Ajoutez d'autres paramètres selon vos besoins
+    # Add other parameters as needed
 
     # GitHub repository API URL for version checking
     GITHUB_API_URL = "https://api.github.com/repos/cipheritall/cipherli/releases"

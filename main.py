@@ -16,7 +16,9 @@ def main():
     if CipherLiConfig.CHECK_UPDATES:
         check_updates()
 
-    parser = argparse.ArgumentParser(description=f"{CipherLiConfig.NAME} {CipherLiConfig.VERSION} - File encryption/decryption tool")
+    parser = argparse.ArgumentParser(
+        description=f"{CipherLiConfig.NAME} v{CipherLiConfig.VERSION} - Secure File Encryption Tool"
+    )
     parser.add_argument("mode", choices=["encrypt", "decrypt"], help="Mode: encrypt or decrypt")
     parser.add_argument("password", help="Password for key derivation")
     parser.add_argument("input_file", help="Path to input file")
