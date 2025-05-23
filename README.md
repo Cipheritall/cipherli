@@ -5,6 +5,9 @@
 <p align="center">
    <img src="https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black" />
    <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/Cipheritall/cipherli/test.yml">
+    
+<a href="https://github.com/Cipheritall/cipherli/releases/latest">
+<img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Frepos%2Fcipheritall%2Fcipherli%2Freleases%2Flatest&query=name&logo=auto&label=Latest%20version&labelColor=%23bf9999&color=%23078528&link=https%3A%2F%2Fgithub.com%2FCipheritall%2Fcipherli%2Freleases"></a>
 </p>
 
 ------
@@ -83,7 +86,9 @@ The `-r` flag enables recursive processing of subfolders.
 
 ## Version
 
-Current version: 1.4.1
+<a href="https://github.com/Cipheritall/cipherli/releases/latest">
+<img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Frepos%2Fcipheritall%2Fcipherli%2Freleases%2Flatest&query=name&style=for-the-badge&logo=auto&label=Latest%20version&labelColor=%23ff0000&color=%23078528&link=https%3A%2F%2Fgithub.com%2FCipheritall%2Fcipherli%2Freleases">
+</a>
 
 ## License
 
