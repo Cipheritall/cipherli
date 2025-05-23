@@ -41,6 +41,8 @@ CipherLi is a command-line tool for file encryption and decryption using symmetr
 
 ### Basic Commands
 
+![How to use](./usage.gif "How to use")
+
 Encrypt a file:
 
 ```bash
